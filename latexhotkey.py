@@ -60,6 +60,7 @@ $$
         controller.release('s')
         controller.type(
 """
+$$ latex
 \\begin{equation*} 
 \left\{ 
 \\begin{aligned} 
@@ -68,6 +69,7 @@ equation 1
 \end{aligned} 
 \\right. 
 \end{equation*}
+$$
 """)
 
     with keyboard.GlobalHotKeys({
