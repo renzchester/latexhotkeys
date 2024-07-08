@@ -1,4 +1,4 @@
-('E:\\Python\\LaTex Project\\build\\latexhotkey\\PYZ-00.pyz',
+('E:\\Git Repos\\latexhotkeys\\build\\latexhotkey\\PYZ-00.pyz',
  [('PIL',
    'C:\\Users\\rcnic\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PIL\\__init__.py',
    'PYMODULE'),

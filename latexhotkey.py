@@ -21,12 +21,60 @@ import threading
 def start_hotkeys():
     controller = keyboard.Controller()
 
+    def type_cancel():
+        controller.release(keyboard.Key.ctrl)
+        controller.release(keyboard.Key.alt)
+        controller.release('c')
+        controller.type('\\cancel{x}')
+
+    def type_large():
+        controller.release(keyboard.Key.ctrl)
+        controller.release(keyboard.Key.alt)
+        controller.release('l')
+        controller.type('\\large{x}')
+
+    def type_approx():
+        controller.release(keyboard.Key.ctrl)
+        controller.release(keyboard.Key.alt)
+        controller.release('a')
+        controller.type('\\approx')
+
+    def type_cdot():
+        controller.release(keyboard.Key.ctrl)
+        controller.release(keyboard.Key.alt)
+        controller.release('m')
+        controller.type('\\cdot')
+
+    def type_sqrt_index():
+        controller.release(keyboard.Key.ctrl)
+        controller.release(keyboard.Key.alt)
+        controller.release('s')
+        controller.type('\\sqrt[x]{y}')
+
+    def type_sqrt():
+        controller.release(keyboard.Key.ctrl)
+        controller.release(keyboard.Key.alt)
+        controller.release('q')
+        controller.type('\\sqrt{x}')
+
+    def type_triangle():
+        controller.release(keyboard.Key.ctrl)
+        controller.release(keyboard.Key.alt)
+        controller.release('t')
+        controller.type('\\triangle')
+
     def type_comma():
         controller.release(keyboard.Key.ctrl)
         controller.release(keyboard.Key.alt)
         controller.release(',')
         controller.type('\\textsf{,}')
 
+
+    def type_comma():
+        controller.release(keyboard.Key.ctrl)
+        controller.release(keyboard.Key.alt)
+        controller.release(',')
+        controller.type('\\textsf{,}')
 
     def type_dot():
         controller.release(keyboard.Key.ctrl)
@@ -36,7 +84,7 @@ def start_hotkeys():
 
     def type_latex():
         controller.release(keyboard.Key.ctrl)
-        controller.release(keyboard.Key.alt)
+        controller.release(keyboard.Key.shift)
         controller.release('l')
         controller.type(
 """
@@ -52,12 +100,12 @@ $$
         controller.release(keyboard.Key.ctrl)
         controller.release(keyboard.Key.alt)
         controller.release('f')
-        controller.type('\dfrac{}{}')
+        controller.type('\dfrac{x}{y}')
 
     def type_system():
         controller.release(keyboard.Key.ctrl)
-        controller.release(keyboard.Key.alt)
-        controller.release('s')
+        controller.release(keyboard.Key.shift)
+        controller.release('y')
         controller.type(
 """
 $$ latex
@@ -75,9 +123,16 @@ $$
     with keyboard.GlobalHotKeys({
         '<ctrl>+<alt>+,': type_comma,
         '<ctrl>+<alt>+.': type_dot,
-        '<ctrl>+<alt>+l': type_latex,
         '<ctrl>+<alt>+f': type_frac,
-        '<ctrl>+<alt>+s': type_system
+        '<ctrl>+<alt>+c': type_cancel,
+        '<ctrl>+<alt>+l': type_large,
+        '<ctrl>+<alt>+a': type_approx,
+        '<ctrl>+<alt>+m': type_cdot,
+        '<ctrl>+<alt>+s': type_sqrt_index,
+        '<ctrl>+<alt>+q': type_sqrt,
+        '<ctrl>+<alt>+t': type_triangle,
+        '<ctrl>+<shift>+y': type_system,
+        '<ctrl>+<shift>+l': type_latex
     }) as h:
         h.join()
 
