@@ -85,7 +85,7 @@ def start_hotkeys():
     def type_latex():
         controller.release(keyboard.Key.ctrl)
         controller.release(keyboard.Key.shift)
-        controller.release('l')
+        controller.release('x')
         controller.type(
 """
 $$ latex
@@ -105,7 +105,7 @@ $$
     def type_system():
         controller.release(keyboard.Key.ctrl)
         controller.release(keyboard.Key.shift)
-        controller.release('y')
+        controller.release('e')
         controller.type(
 """
 $$ latex
@@ -131,8 +131,8 @@ $$
         '<ctrl>+<alt>+s': type_sqrt_index,
         '<ctrl>+<alt>+q': type_sqrt,
         '<ctrl>+<alt>+t': type_triangle,
-        '<ctrl>+<shift>+y': type_system,
-        '<ctrl>+<shift>+l': type_latex
+        '<ctrl>+<shift>+e': type_system,
+        '<ctrl>+<shift>+x': type_latex
     }) as h:
         h.join()
 
