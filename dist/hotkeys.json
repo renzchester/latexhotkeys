@@ -1,0 +1,14 @@
+{
+"Generic LaTeX": "<ctrl>+<alt>+x",
+"System of Equations": "<ctrl>+<alt>+y",
+"\\textsf{.}": "<ctrl>+<alt>+.",
+"\\textsf{,}": "<ctrl>+<alt>+,",
+"\\cdot": "<ctrl>+<alt>+m",
+"\\cancel{x}": "<ctrl>+<alt>+c",
+"\\dfrac{x}{y}": "<ctrl>+<alt>+f",
+"\\triangle": "<ctrl>+<alt>+t",
+"\\sqrt[x]{y}": "<ctrl>+<alt>+q",
+"\\approx": "<ctrl>+<alt>+a",
+"\\large": "<ctrl>+<alt>+l",
+"\\sqrt{x}": "<ctrl>+<alt>+s"
+}
