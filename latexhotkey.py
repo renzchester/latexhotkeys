@@ -18,6 +18,15 @@ def start_hotkeys():
     except FileNotFoundError:
         pass  # No saved hotkeys yet
 
+    try:
+        with open('output.py', 'r') as file:
+            output_code = file.read()
+    except FileNotFoundError:
+        pass  # No saved hotkeys yet
+    
+    local_scope={}
+    exec(output_code, globals(), local_scope)
+
     def type_cancel():
         hotkey_combination = hotkey["\\cancel{x}"].split('+')
         for press in hotkey_combination:
@@ -26,7 +35,7 @@ def start_hotkeys():
                 controller.release(getattr(keyboard.Key, new_press))
             else:
                 controller.release(f'{press}')
-        controller.type('\\cancel{x}')
+        controller.type(local_scope['cancel'])
 
     def type_large():
         hotkey_combination = hotkey["\\large"].split('+')
@@ -36,7 +45,7 @@ def start_hotkeys():
                 controller.release(getattr(keyboard.Key, new_press))
             else:
                 controller.release(f'{press}')
-        controller.type('\\large{x}')
+        controller.type(local_scope['large'])
 
     def type_approx():
         hotkey_combination = hotkey["\\approx"].split('+')
@@ -46,7 +55,7 @@ def start_hotkeys():
                 controller.release(getattr(keyboard.Key, new_press))
             else:
                 controller.release(f'{press}')
-        controller.type('\\approx')
+        controller.type(local_scope['approx'])
 
     def type_cdot():
         hotkey_combination = hotkey["\\cdot"].split('+')
@@ -56,7 +65,7 @@ def start_hotkeys():
                 controller.release(getattr(keyboard.Key, new_press))
             else:
                 controller.release(f'{press}')
-        controller.type('\\cdot')
+        controller.type(local_scope['cdot'])
 
     def type_sqrt_index():
         hotkey_combination = hotkey["\\sqrt[x]{y}"].split('+')
@@ -66,11 +75,10 @@ def start_hotkeys():
                 controller.release(getattr(keyboard.Key, new_press))
             else:
                 controller.release(f'{press}')
-        controller.type('\\sqrt[x]{y}')
+        controller.type(local_scope['sqrt_index'])
 
     def type_sqrt():
         hotkey_combination = hotkey["\\sqrt{x}"].split('+')
-        print(hotkey_combination)
         for press in hotkey_combination:
             if press == '<none>':
                 return
@@ -79,7 +87,7 @@ def start_hotkeys():
                 controller.release(getattr(keyboard.Key, new_press))
             else:
                 controller.release(f'{press}')
-        controller.type('\\sqrt{x}')
+        controller.type(local_scope['sqrt'])
 
     def type_triangle():
         hotkey_combination = hotkey["\\triangle"].split('+')
@@ -89,7 +97,7 @@ def start_hotkeys():
                 controller.release(getattr(keyboard.Key, new_press))
             else:
                 controller.release(f'{press}')
-        controller.type('\\triangle')
+        controller.type(local_scope['triangle'])
 
     def type_comma():
         hotkey_combination = hotkey["\\textsf{,}"].split('+')
@@ -99,7 +107,7 @@ def start_hotkeys():
                 controller.release(getattr(keyboard.Key, new_press))
             else:
                 controller.release(f'{press}')
-        controller.type('\\textsf{,}')
+        controller.type(local_scope['comma'])
 
     def type_dot():
         hotkey_combination = hotkey["\\textsf{.}"].split('+')
@@ -109,7 +117,7 @@ def start_hotkeys():
                 controller.release(getattr(keyboard.Key, new_press))
             else:
                 controller.release(f'{press}')
-        controller.type('\\textsf{.}')
+        controller.type(local_scope['dot'])
 
     def type_latex():
         hotkey_combination = hotkey["Generic LaTeX"].split('+')
@@ -119,15 +127,7 @@ def start_hotkeys():
                 controller.release(getattr(keyboard.Key, new_press))
             else:
                 controller.release(f'{press}')
-        controller.type(
-"""
-$$ latex
-\\large\\begin{align}
-equation 1
-\\\[-0.9em]\\\ equation 2
-\end{align}
-$$
-""")
+        controller.type(local_scope['generic_latex'])
 
     def type_frac():
         hotkey_combination = hotkey["\\dfrac{x}{y}"].split('+')
@@ -137,7 +137,7 @@ $$
                 controller.release(getattr(keyboard.Key, new_press))
             else:
                 controller.release(f'{press}')
-        controller.type('\dfrac{x}{y}')
+        controller.type(local_scope['fraction'])
 
     def type_system():
         hotkey_combination = hotkey["System of Equations"].split('+')
@@ -147,19 +147,7 @@ $$
                 controller.release(getattr(keyboard.Key, new_press))
             else:
                 controller.release(f'{press}')
-        controller.type(
-"""
-$$ latex
-\\large\\begin{equation*} 
-\left\{ 
-\\begin{aligned} 
-equation 1 
-\\\[-0.9em]\\\ equation 2 
-\end{aligned} 
-\\right. 
-\end{equation*}
-$$
-""")
+        controller.type(local_scope['system_of_equations'])
 
     valid_hotkeys = {k: v for k, v in hotkey.items() if v is not None}
 
@@ -211,7 +199,6 @@ $$
         valid_hotkeys.pop("Generic LaTeX")
         valid_hotkeys[hotkey["Generic LaTeX"]]=type_latex
 
-    print(valid_hotkeys)
     with keyboard.GlobalHotKeys(
         valid_hotkeys) as h:
         h.join()
